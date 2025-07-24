@@ -88,18 +88,3 @@ struct MutableCalibCameraIntrinsics
 
 }  // namespace industrial_calibration
 
-namespace YAML
-{
-class Node;
-
-template <typename T>
-struct convert;
-
-template <>
-struct convert<industrial_calibration::CameraIntrinsics>
-{
-  static Node encode(const industrial_calibration::CameraIntrinsics& rhs);
-  static bool decode(const YAML::Node& node, industrial_calibration::CameraIntrinsics& rhs);
-};
-
-}  // namespace YAML

@@ -7,16 +7,6 @@
 #include <utility>
 #include <vector>
 
-// Forward declaration of YAML functions for serialization
-namespace YAML
-{
-template <typename T, typename S>
-struct as_if;
-
-template <typename T>
-struct convert;
-}  // namespace YAML
-
 namespace industrial_calibration
 {
 /**
@@ -130,7 +120,6 @@ struct DHTransform
   std::size_t random_seed;
 
 protected:
-  friend struct YAML::as_if<DHTransform, void>;
   DHTransform() = default;
 };
 
@@ -246,30 +235,8 @@ protected:
   /** @brief Fixed transform offset to the beginning of the chain */
   Eigen::Isometry3d base_offset_;
 
-  friend struct YAML::convert<DHChain>;
-  friend struct YAML::as_if<DHChain, void>;
   DHChain() = default;
 };
 
 }  // namespace industrial_calibration
 
-namespace YAML
-{
-class Node;
-
-template <typename T>
-struct convert;
-
-template <>
-struct convert<industrial_calibration::DHTransform>
-{
-  static bool decode(const Node& n, industrial_calibration::DHTransform& val);
-};
-
-template <>
-struct convert<industrial_calibration::DHChain>
-{
-  inline static bool decode(const Node& n, industrial_calibration::DHChain& val);
-};
-
-}  // namespace YAML

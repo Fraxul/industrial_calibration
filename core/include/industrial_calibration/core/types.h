@@ -175,25 +175,3 @@ struct KinematicMeasurement
 
 }  // namespace industrial_calibration
 
-namespace YAML
-{
-class Node;
-
-template <typename T>
-struct convert;
-
-template <Eigen::Index SENSOR_DIM, Eigen::Index WORLD_DIM>
-struct convert<industrial_calibration::Correspondence<SENSOR_DIM, WORLD_DIM>>
-{
-  static Node encode(const industrial_calibration::Correspondence<SENSOR_DIM, WORLD_DIM>& corr);
-  static bool decode(const YAML::Node& node, industrial_calibration::Correspondence<SENSOR_DIM, WORLD_DIM>& rhs);
-};
-
-template <Eigen::Index SENSOR_DIM, Eigen::Index WORLD_DIM>
-struct convert<industrial_calibration::Observation<SENSOR_DIM, WORLD_DIM>>
-{
-  static Node encode(const industrial_calibration::Observation<SENSOR_DIM, WORLD_DIM>& obs);
-  static bool decode(const YAML::Node& node, industrial_calibration::Observation<SENSOR_DIM, WORLD_DIM>& obs);
-};
-
-}  // namespace YAML

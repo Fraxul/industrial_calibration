@@ -7,11 +7,6 @@
 #include <memory>
 #include <vector>
 
-namespace YAML
-{
-class Node;
-}
-
 namespace industrial_calibration
 {
 /**
