@@ -14,12 +14,14 @@ struct CameraIntrinsics
   std::array<double, 4> values{ 0.0, 0.0, 0.0, 0.0 };
 
   double& fx() { return values[0]; }
-  double& fy() { return values[1]; }
+  double& aspect() {return values[1]; }
   double& cx() { return values[2]; }
   double& cy() { return values[3]; }
 
+  double fy() const { return values[0] * values[1]; }
+
   const double& fx() const { return values[0]; }
-  const double& fy() const { return values[1]; }
+  const double& aspect() const { return values[1]; }
   const double& cx() const { return values[2]; }
   const double& cy() const { return values[3]; }
 
@@ -38,7 +40,8 @@ struct CalibCameraIntrinsics
   CalibCameraIntrinsics(const T* data) : data(data) {}
 
   const T& fx() const { return data[0]; }
-  const T& fy() const { return data[1]; }
+  T fy() const { return data[0] * data[1]; }
+  const T& aspect() const { return data[1]; }
   const T& cx() const { return data[2]; }
   const T& cy() const { return data[3]; }
 
@@ -62,7 +65,9 @@ struct MutableCalibCameraIntrinsics
   MutableCalibCameraIntrinsics(T* data) : data(data) {}
 
   const T& fx() const { return data[0]; }
-  const T& fy() const { return data[1]; }
+  T fy() const { return data[0] * data[1]; }
+
+  const T& aspect() const { return data[1]; }
   const T& cx() const { return data[2]; }
   const T& cy() const { return data[3]; }
 
@@ -73,7 +78,7 @@ struct MutableCalibCameraIntrinsics
   const T& k3() const { return data[8]; }
 
   T& fx() { return data[0]; }
-  T& fy() { return data[1]; }
+  T& aspect() { return data[1]; }
   T& cx() { return data[2]; }
   T& cy() { return data[3]; }
 

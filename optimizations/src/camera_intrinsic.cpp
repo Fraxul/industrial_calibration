@@ -59,7 +59,7 @@ CameraIntrinsicResult optimize(const CameraIntrinsicProblem& params)
 
   MutableCalibCameraIntrinsics<double> internal_intrinsics(internal_intrinsics_data.data());
   internal_intrinsics.fx() = params.intrinsics_guess.fx();
-  internal_intrinsics.fy() = params.intrinsics_guess.fy();
+  internal_intrinsics.aspect() = params.intrinsics_guess.aspect();
   internal_intrinsics.cx() = params.intrinsics_guess.cx();
   internal_intrinsics.cy() = params.intrinsics_guess.cy();
 
@@ -102,6 +102,11 @@ CameraIntrinsicResult optimize(const CameraIntrinsicProblem& params)
   problem.SetParameterLowerBound(internal_intrinsics_data.data(), 2, 0.0);
   problem.SetParameterLowerBound(internal_intrinsics_data.data(), 3, 0.0);
 
+  if (params.fix_aspect) {
+    // Fix aspect ratio (parameter at [1])
+    problem.SetManifold(internal_intrinsics_data.data(), new ceres::SubsetManifold(internal_intrinsics_data.size(), {1}));
+  }
+
   std::vector<const double*> param_blocks;
   std::map<const double*, std::vector<std::string>> param_labels;
 
@@ -132,7 +137,7 @@ CameraIntrinsicResult optimize(const CameraIntrinsicProblem& params)
   result.converged = summary.termination_type == ceres::CONVERGENCE;
 
   result.intrinsics.fx() = internal_intrinsics.fx();
-  result.intrinsics.fy() = internal_intrinsics.fy();
+  result.intrinsics.aspect() = internal_intrinsics.aspect();
   result.intrinsics.cx() = internal_intrinsics.cx();
   result.intrinsics.cy() = internal_intrinsics.cy();
 

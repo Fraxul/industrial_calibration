@@ -6,7 +6,7 @@ namespace industrial_calibration
 {
 std::ostream& operator<<(std::ostream& stream, const CameraIntrinsics& intr)
 {
-  stream << "Camera intrinsics:\n\tfx = " << intr.fx() << "\n\tfy = " << intr.fy() << "\n\tcx = " << intr.cx()
+  stream << "Camera intrinsics:\n\tfx = " << intr.fx() << "\n\taspect = " << intr.aspect() << "\n\tcx = " << intr.cx()
          << "\n\tcy = " << intr.cy();
   return stream;
 }

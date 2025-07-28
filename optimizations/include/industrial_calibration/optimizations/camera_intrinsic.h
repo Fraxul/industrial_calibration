@@ -14,6 +14,7 @@ struct CameraIntrinsicProblem
 {
   std::vector<Correspondence2D3D::Set> image_observations;
   CameraIntrinsics intrinsics_guess;
+  bool fix_aspect;
   bool use_extrinsic_guesses;
   std::vector<Eigen::Isometry3d> extrinsic_guesses;
 
