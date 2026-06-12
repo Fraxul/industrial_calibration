@@ -4,7 +4,10 @@
 #include <industrial_calibration/core/camera_intrinsics.h>
 #include <industrial_calibration/core/pose_6d.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 #include <ceres/rotation.h>
+#pragma clang diagnostic pop
 
 namespace industrial_calibration
 {
@@ -68,6 +71,9 @@ inline Eigen::Matrix<T, 2, 1> projectPoint(const CameraIntrinsics& intr, const E
   // Scale the input point by its distance from the camera (i.e. z-coordinate)
   Eigen::Matrix<T, 3, 1> scaled_point(point);
   scaled_point(2) = T(1.0);
+
+  // Allow std::abs to participate in overload resolution below -- eliminates -Wabsolute-value warning.
+  using std::abs;
 
   // Avoid divide by zero
   if (abs(point.z() - T(0.0)) > T(1.e-10))

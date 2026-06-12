@@ -5,7 +5,10 @@
 #include <industrial_calibration/optimizations/maximum_likelihood.h>
 #include <industrial_calibration/optimizations/local_parameterization.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 #include <ceres/ceres.h>
+#pragma clang diagnostic pop
 #include <thread>
 
 namespace industrial_calibration

@@ -5,7 +5,10 @@
 #include <industrial_calibration/core/types.h>
 #include <industrial_calibration/core/exceptions.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 #include <ceres/ceres.h>
+#pragma clang diagnostic pop
 
 namespace industrial_calibration
 {

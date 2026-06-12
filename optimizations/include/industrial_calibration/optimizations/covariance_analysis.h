@@ -3,7 +3,10 @@
 #include <industrial_calibration/optimizations/covariance_types.h>
 #include <industrial_calibration/core/types.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 #include <ceres/ceres.h>
+#pragma clang diagnostic pop
 #include <Eigen/Dense>
 
 namespace industrial_calibration

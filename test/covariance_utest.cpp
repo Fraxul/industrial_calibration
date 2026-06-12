@@ -2,7 +2,10 @@
 #include <industrial_calibration_tests/circle_fit.h>
 #include <industrial_calibration/core/exceptions.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 #include <ceres/ceres.h>
+#pragma clang diagnostic pop
 #include <cmath>
 #include <functional>
 #include <gtest/gtest.h>

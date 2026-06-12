@@ -1,7 +1,10 @@
 #include <industrial_calibration_tests/circle_fit.h>
 #include <industrial_calibration/optimizations/covariance_analysis.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 #include <ceres/ceres.h>
+#pragma clang diagnostic pop
 
 namespace industrial_calibration
 {

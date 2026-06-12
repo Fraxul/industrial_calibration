@@ -3,7 +3,10 @@
 #include <industrial_calibration/optimizations/covariance_analysis.h>
 #include <industrial_calibration/core/serialization.h>
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wshadow"
 #include <ceres/ceres.h>
+#pragma clang diagnostic pop
 
 namespace industrial_calibration
 {

@@ -119,11 +119,11 @@ void addSubsetParameterization(ceres::Problem& problem, const std::map<const dou
         mask.erase(last, mask.end());
 
         // Check that the max index is not greater than the number of elements in the block
-        auto it = std::max_element(mask.begin(), mask.end());
-        if (static_cast<std::size_t>(*it) >= block_size)
+        auto largest_index_it = std::max_element(mask.begin(), mask.end());
+        if (static_cast<std::size_t>(*largest_index_it) >= block_size)
         {
           std::stringstream ss;
-          ss << "The largest mask index cannot be larger than or equal to the parameter block size (" << *it
+          ss << "The largest mask index cannot be larger than or equal to the parameter block size (" << *largest_index_it
              << " >= " << block_size << ")";
           throw OptimizationException(ss.str());
         }
